@@ -1,5 +1,5 @@
 # WaitLess Logistics - Especificação de Requisitos e Artefatos
-**MVP — git**  
+**MVP —  Sistema de Monitoramento de Tempo Parado em Roteiros**  
 **Engenharia de Software II**
 
 Por: Alex Marques

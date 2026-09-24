@@ -1,7 +1,7 @@
 @startuml
 node "Dispositivo do Usuário (Smartphone / Desktop)" as ClientNode {
     artifact "Navegador Web (Chrome / Firefox / Edge)" {
-        component "Páginas Estáticas\n(index.html, styles.css, app.js)" as WebClient
+        component "Páginas Estáticas\n(html, css, js)" as WebClient
     }
 }
 

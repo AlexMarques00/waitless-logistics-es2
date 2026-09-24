@@ -1,0 +1,24 @@
+WaitLess/
+├── schema.sql              # Script MySQL de criação do banco e tabelas
+├── requirements.txt        # Dependências Python (flask, mysql-connector-python, etc.)
+├── app.py                  # Ponto de entrada do Flask (rotas da API e servidor)
+│
+└── src/
+    ├── database.py         # Conexão com o banco de dados MySQL
+    ├── rules.py            # Lógica dos cálculos (RN01, RN02, RN03, RN07)
+    │
+    ├── static/             # Arquivos estáticos do Front-end
+    │   ├── css/
+    │   │   └── style.css   # Estilização responsiva para mobile e desktop
+    │   ├── js/
+    │   │   ├── api.js      # Funções de requisição Fetch HTTP
+    │   │   ├── driver.js   # Lógica da tela do entregador (botões de registro)
+    │   │   └── dashboard.js# Integração com Chart.js para os gráficos
+    │   └── img/            # Imagens e ícones
+    │
+    └── templates/          # Páginas HTML renderizadas
+        ├── login.html      # Controle de acesso (RNF04)
+        ├── entregador.html # Interface móvel responsiva (RNF02)
+        ├── roteiros.html   # Cadastro e montagem de roteiros (RF04)
+        ├── parametros.html # Parametrização de custos e jornada (RF09, RF10)
+        └── dashboard.html  # Painel com gráficos (RF08)
