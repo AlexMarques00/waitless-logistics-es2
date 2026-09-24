@@ -1,0 +1,84 @@
+@startuml Sistema_de_Monitoramento_de_Tempo_Parado
+
+' Configurações visuais do diagrama
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam actorStyle hollow
+
+left to right direction
+
+' ==========================================
+' ATORES
+' ==========================================
+actor "Condutor" as Condutor
+actor "Gestor Operacional" as Gestor
+actor "Administrador" as Admin
+
+' Relacionamento de Herança entre Atores (Administrador herda do Gestor)
+Admin -up-|> Gestor
+
+' ==========================================
+' SISTEMA E CASOS DE USO
+' ==========================================
+rectangle "Sistema de Monitoramento de Tempo Parado" {
+
+    package "Operação e Registro" {
+        usecase "UC01 - Registrar Chegada e Saída no Ponto" as UC01
+        usecase "UC02 - Calcular Tempo Parado" as UC02
+        
+        ' Relação Include: O registro sempre executa o cálculo do tempo parado
+        UC01 .> UC02 : «include»
+    }
+
+    package "Planejamento e Roteamento" {
+        usecase "UC03 - Montar Roteiro Diário" as UC03
+        usecase "UC04 - Calcular Custo Estimado do Roteiro" as UC04
+        
+        ' Relação Extend/Include: A montagem do roteiro calcula o custo estimado
+        UC03 .> UC04 : «include»
+    }
+
+    package "Análise e Relatórios" {
+        usecase "UC05 - Exibir Dashboard de Tempo Parado" as UC05
+        usecase "UC06 - Exibir Histórico de Pontos e Tempos" as UC06
+        usecase "UC07 - Exportar Relatórios do Período" as UC07
+        
+        ' Relação Extend: Histórico estende a visualização do Dashboard (Opcional/Detalhada)
+        UC06 .> UC05 : «extend»
+    }
+
+    package "Parametrização do Sistema" {
+        usecase "UC08 - Parametrizar Regras e Jornada Padrão" as UC08
+        usecase "UC09 - Parametrizar Custos" as UC09
+    }
+
+    package "Gestão de Cadastros" {
+        usecase "UC10 - Cadastrar Condutor" as UC10
+        usecase "UC11 - Cadastrar Gestor" as UC11
+        usecase "UC12 - Cadastrar Pontos" as UC12
+    }
+}
+
+' ==========================================
+' ASSOCIAÇÕES ENTRE ATORES E CASOS DE USO
+' ==========================================
+
+' Condutor
+Condutor --> UC01
+
+' Gestor Operacional
+Gestor --> UC03
+Gestor --> UC05
+Gestor --> UC06
+Gestor --> UC07
+Gestor --> UC10
+Gestor --> UC12
+
+' Administrador
+' (Nota: O Administrador herda todas as permissões do Gestor)
+Admin --> UC08
+Admin --> UC09
+Admin --> UC11
+
+@endparam
+@enduml

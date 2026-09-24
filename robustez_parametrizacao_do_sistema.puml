@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Administrador" as Admin
+
+package "RF09 e RF10 - Parametrizações do Sistema" {
+    boundary "TelaParametros" as b9
+    control "ControladorParametros" as c9
+    entity "Parametro" as eParam
+}
+
+Admin --> b9 : Informar valores de combustível, km/litro e custo/km
+Admin --> b9 : Definir jornada padrão (8h/dia) e regras de cálculo
+b9 --> c9 : Validar entradas de parâmetro
+c9 --> eParam : Atualizar ou persistir parâmetros globais
+@enduml

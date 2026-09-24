@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Gerente / Coordenador" as Gerente
+
+package "RF01 - Cadastrar Motorista" {
+    boundary "TelaCadastroMotorista" as b1
+    control "ControladorMotorista" as c1
+    entity "Motorista" as e1
+}
+
+package "RF02 - Cadastrar Gerente" {
+    boundary "TelaCadastroGerente" as b2
+    control "ControladorGerente" as c2
+    entity "Gerente" as e2
+}
+
+package "RF03 - Cadastrar Pontos" {
+    boundary "TelaCadastroPonto" as b3
+    control "ControladorPonto" as c3
+    entity "Ponto" as e3
+}
+
+package "RF04 - Montar Roteiro Diário" {
+    boundary "TelaMontagemRoteiro" as b4
+    control "ControladorRoteiro" as c4
+    entity "Roteiro" as e4
+}
+
+Gerente --> b1 : Inserir dados do motorista/veículo
+b1 --> c1 : Validar campos e salvar
+c1 --> e1 : Persistir Motorista
+
+Gerente --> b2 : Inserir dados do gerente
+b2 --> c2 : Validar campos e salvar
+c2 --> e2 : Persistir Gerente
+
+Gerente --> b3 : Inserir endereço/coordenadas
+b3 --> c3 : Validar localização
+c3 --> e3 : Persistir Ponto
+
+Gerente --> b4 : Selecionar motorista, data e ordem de pontos
+b4 --> c4 : Validar sequência e regra de motorista único por data (RN05, RN06)
+c4 --> e4 : Criar Roteiro
+c4 --> e3 : Associar Pontos ao Roteiro
+@enduml

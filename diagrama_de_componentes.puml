@@ -1,0 +1,20 @@
+@startuml
+package "Navegador Web (Front-end Simplificado)" {
+    [HTML5 / CSS3 / Vanilla JS] as UI
+    [Chart.js (via CDN)] as Charts
+}
+
+package "Servidor Back-end (Python / Flask)" {
+    [API REST / Rotas (app.py)] as API
+    [Regras de Negócio & Cálculos] as Logica
+}
+
+database "SGBD Relacional" {
+    [MySQL (stopwatch_db)] as DB
+}
+
+UI --> Charts : Renderiza gráficos do Dashboard (RF08)
+UI --> API : Envia/Recebe requisições via Fetch API (JSON)
+API --> Logica : Executa regras (RN01, RN02, RN03, RN07)
+Logica --> DB : Executa consultas e gravações SQL
+@enduml

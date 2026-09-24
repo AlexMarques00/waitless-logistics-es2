@@ -1,0 +1,77 @@
+@startuml
+skinparam classAttributeIconSize 0
+top to bottom direction
+
+package "Modelo de Dados Conceitual" {
+
+    class "Gerente" as Gerente {
+        - id: int
+        - nome: String
+        - telefone: String
+        - email: String
+        - equipeSobResponsabilidade: String
+        + cadastrarGerente(): void
+        + montarRoteiro(motorista: Motorista, data: Date, pontos: List<Ponto>): Roteiro
+        + parametrizarCustos(combustivel: float, kmPorLitro: float, custoPorKm: float): void
+        + parametrizarJornada(jornadaHoras: float): void
+        + consultarDashboard(periodo: String): void
+        + exportarRelatorio(periodo: String): File
+    }
+
+    class "Motorista" as Motorista {
+        - id: int
+        - nome: String
+        - telefone: String
+        - documento: String
+        - veiculo: String
+        - rendimentoKmLitro: float
+        + cadastrarMotorista(): void
+        + registrarChegadaSaida(pontoId: int, dataHora: DateTime): void
+    }
+
+    class "Roteiro" as Roteiro {
+        - id: int
+        - data: Date
+        - distanciaTotal: float
+        - tempoTotalParado: float
+        - custoEstimado: float
+        + calcularTempoTotalParado(): float
+        + calcularCustoEstimado(param: Parametro): float
+        + adicionarPonto(ponto: Ponto, ordem: int): void
+        + obterHistoricoPontos(): List<Ponto>
+    }
+
+    class "Ponto" as Ponto {
+        - id: int
+        - endereco: String
+        - latitude: float
+        - longitude: float
+        - dataHoraChegada: DateTime
+        - dataHoraSaida: DateTime
+        - tempoParadoCalculado: float
+        - ordem: int
+        + registrarChegada(dataHora: DateTime): void
+        + registrarSaida(dataHora: DateTime): void
+        + calcularTempoParado(): float
+    }
+
+    class "Parametro" as Parametro {
+        - id: int
+        - valorCombustivel: float
+        - kmPorLitroVeiculo: float
+        - custoPorKm: float
+        - jornadaPadraoHoras: float
+        - regrasCalculoTempoParado: String
+        + atualizarParametros(): void
+    }
+
+}
+
+' Relacionamentos com Cardinalidades
+Gerente "1" -- "0..*" Motorista : gerencia >
+Gerente "1" -- "0..*" Roteiro : cria e monitora >
+Motorista "1" -- "0..*" Roteiro : executa (RN05) >
+Roteiro "1" *-- "1..*" Ponto : composto por ordem sequencial (RN06) >
+Roteiro "0..*" ..> "1" Parametro : utiliza para cálculos (RN04, RN07) >
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Gerente / Coordenador" as Gerente
+
+package "RF07 - Histórico de Pontos e Tempos" {
+    boundary "TelaHistorico" as b7
+    control "ControladorHistorico" as c7
+}
+
+package "RF08 - Dashboard de Tempo Parado" {
+    boundary "PainelDashboard" as b8
+    control "ControladorDashboard" as c8
+}
+
+package "RF12 - Exportar Relatórios" {
+    boundary "TelaExportacao" as b12
+    control "ControladorExportacao" as c12
+}
+
+entity "Roteiro" as eRoteiro
+entity "Ponto" as ePonto
+
+Gerente --> b7 : Filtrar por período e motorista
+b7 --> c7 : Buscar registros
+c7 --> eRoteiro : Consultar roteiros do período
+c7 --> ePonto : Consultar pontos e tempos
+c7 --> b7 : Apresentar histórico detalhado com endereços
+
+Gerente --> b8 : Solicitar gráficos (dia, mês e período)
+b8 --> c8 : Processar indicadores de tempo parado
+c8 --> eRoteiro : Buscar acumulados por período
+c8 --> b8 : Renderizar gráficos agregados
+
+Gerente --> b12 : Solicitar exportação (PDF/CSV)
+b12 --> c12 : Gerar arquivo de dados
+c12 --> eRoteiro : Extrair consolidados do período
+c12 --> b12 : Disponibilizar download do relatório
+@enduml

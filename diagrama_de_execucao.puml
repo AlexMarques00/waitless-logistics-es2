@@ -1,0 +1,20 @@
+@startuml
+node "Dispositivo do Usuário (Smartphone / Desktop)" as ClientNode {
+    artifact "Navegador Web (Chrome / Firefox / Edge)" {
+        component "Páginas Estáticas\n(index.html, styles.css, app.js)" as WebClient
+    }
+}
+
+node "Servidor da Aplicação & Banco" as ServerNode {
+    node "Ambiente Python 3" {
+        artifact "Servidor Flask (app.py)\nPorta 5000" as FlaskApp
+    }
+    
+    database "Serviço MySQL" {
+        component "Base de Dados\nPorta 3306" as MySQLServer
+    }
+}
+
+WebClient -- FlaskApp : Requisições HTTP / JSON (Fetch API)
+FlaskApp -- MySQLServer : Conexão SQL (mysql-connector)
+@enduml

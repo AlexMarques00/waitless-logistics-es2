@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Motorista / Motoboy" as Motorista
+
+package "RF05, RF06 e RF11 - Registro de Ponto e Cálculos" {
+    boundary "TelaRegistroPonto" as b5
+    control "ControladorExecucaoRoteiro" as c5
+    control "CalculadorTempoEParada" as c6
+    control "CalculadorCustoRoteiro" as c11
+    entity "Ponto" as ePonto
+    entity "Roteiro" as eRoteiro
+    entity "Parametro" as eParam
+}
+
+Motorista --> b5 : Registrar Chegada/Saída no ponto
+b5 --> c5 : Enviar timestamp e ID do ponto
+c5 --> ePonto : Atualizar data/hora de chegada e saída
+
+c5 --> c6 : Solicitar cálculo de tempo parado
+c6 --> ePonto : Ler horários
+c6 --> c6 : Aplicar RN01 (desconsiderar ponto 1) e RN02 (saída - chegada)
+c6 --> ePonto : Persistir tempoParadoCalculado
+
+c6 --> eRoteiro : Recalcular e atualizar tempoTotalParado (RN03)
+
+c5 --> c11 : Solicitar cálculo de custo do trajeto
+c11 --> eParam : Consultar combustível e km/litro
+c11 --> eRoteiro : Consultar distância total percorrida
+c11 --> c11 : Aplicar regra de custo (RN07)
+c11 --> eRoteiro : Atualizar custoEstimado
+@enduml
