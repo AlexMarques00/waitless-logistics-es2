@@ -8,7 +8,7 @@ Por: Alex Marques
 
 ## 1. Diagrama de Casos de Uso (PlantUML)
 
-![Casos de Uso](caso_de_uso.png)
+![Casos de Uso](diagramas/caso_de_uso.png)
 
 ---
 
@@ -170,25 +170,25 @@ Por: Alex Marques
 
 ### 3.1 Módulo de Parametrização do Sistema
 
-![Parametrização do Sistema](parametrizacao.png)
+![Parametrização do Sistema](diagramas/parametrizacao.png)
 
 ### 3.2  Módulo de Cadastros e Roteamento
 
-![Gestão de Cadastros](cadastros.png)
+![Gestão de Cadastros](diagramas\cadastros.png)
 
 ### 3.3 Módulo de Operação e Execução de Roteiro
 
-![Operação e Coleta](operacao_e_coleta.png)
+![Operação e Coleta](diagramas/operacao_e_coleta.png)
 
 ### 3.4 Módulo de Análise e Relatórios
 
-![Analise e Relatorios](analise_e_relatorios.png)
+![Analise e Relatorios](diagramas/analise_e_relatorios.png)
 
 ---
 
 ## 4. Diagrama de Classes Conceitual
 
-![Diagrama de Classes Conceitual](diagrama_de_classes.png)
+![Diagrama de Classes Conceitual](diagramas/diagrama_de_classes.png)
 
 ---
 
@@ -236,8 +236,8 @@ Adotou-se uma **pilha leve, simples e direta (Monolítica / REST API simples)** 
 
 ### 7.1 Diagrama de Componentes (PlantUML)
 
-![Diagrama de Componentes](componentes.png)
+![Diagrama de Componentes](diagramas/componentes.png)
 
 ### 7.2 Diagrama de Execução (PlantUML)
 
-![Diagrama de Execução](execucao.png)
+![Diagrama de Execução](diagramas/execucao.png)
